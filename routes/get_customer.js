@@ -3,18 +3,28 @@ import db from "../db.js";
 
 const router = express.Router();
 
-router.get("/api/customers/:phone", (req, res) => {
-    const sql = `SELECT * FROM customer ORDER BY customer_id ASC`;
-    db.query(sql, (err, results) => {
+router.get("/api/customer/:phone", (req, res) => {
+    const phoneNumber = req.params.phone;
+
+    const sql = `SELECT * FROM customer WHERE phone = ?`;
+    
+    db.query(sql, [phoneNumber], (err, results) => {
         if (err) {
-            console.error("not_found:", err.message);
+            console.error("Database error:", err.message);
             return res.status(500).json({ error: err.message });
         }
-        res.json({
-            message: "success",
-            count: results.length,
-            data: results,
-        });
+
+        if (results.length > 0) {
+            return res.json({
+                status: "success",
+                data: results[0] 
+            });
+        } else {
+            return res.json({
+                status: "not_found",
+                message: "ไม่พบข้อมูล กรุณาตรวจสอบเบอร์"
+            });
+        }
     });
 });
 
