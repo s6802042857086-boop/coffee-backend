@@ -4,7 +4,7 @@ import db from "../db.js";
 const router = express.Router();
 
 router.get("/api/customers/:phone", (req, res) => {
-    const sql = `SELECT * FROM Menu ORDER BY menu_id ASC`;
+    const sql = `SELECT * FROM customer ORDER BY customer_id ASC`;
     db.query(sql, (err, results) => {
         if (err) {
             console.error("not_found:", err.message);
