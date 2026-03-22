@@ -6,7 +6,7 @@ import post_menu from "./routes/post_menu.js";
 import put_menu from "./routes/put_menu.js";
 import patch_menu from "./routes/patch_menu.js";
 import delete_menu from "./routes/delete_menu.js";
-import get_customer from "./routes/et_customer.js";
+import get_customer from "./routes/get_customer.js";
 
 const app = express();
 app.use(cors());
